@@ -1,0 +1,36 @@
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="shortcut icon" type="image/png" href="/media/icon.ico"/>
+  <title>
+    
+        {% block title %}
+          Облачное хранилище
+        {% endblock %}
+  </title>
+  <body >
+
+  {% block mainmenu %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    {% for m in menu %}
+    <a class="navbar-brand" href="{% url m.url_name %}">{{m.title}}</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    
+    {% endfor %}
+    
+      {% if request.user.is_authenticated %}
+      <li class="last"> {{user.username}} - {{user.groups.all.0.name}} | <a href="{% url 'logout' %}"class="navbar-brand">Выйти</a></li>
+      {% else %}
+      <li class="last"><a href="{% url 'register' %}" class="navbar-brand">Регистрация </a>| <a href="{% url 'login' %}"class="navbar-brand">Войти</a></li>
+      {% endif %}
+    
+    </div>
+  </nav>
+  {% endblock %}
+  
+
+   
+ {% block content %}
+
+{% endblock %}
+
+</body>

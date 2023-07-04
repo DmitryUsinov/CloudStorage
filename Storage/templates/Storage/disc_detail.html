@@ -1,0 +1,30 @@
+{% extends 'Storage/base.html' %}
+
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+
+
+{% block content %}            
+            <div> 
+              </div>
+                {% if files %}     
+                        {% for file in files %}
+                        
+                            <div href="#" class="list-group-item list-group-item-action" style="max-width: 60rem;">{{file.title| truncatewords:10}} --  {{file.info| truncatewords:10}} -- Добавлено: {{file.time_upload}} 
+                                {% if user.groups.all.0.name == "Студент" %}
+                                <a href="{{ file.upload.url }}" type="button" class="btn btn-primary btn-sm" target="_blank">Скачать</a>
+                                
+                                {% else %}
+                                <a href="{{ file.upload.url }}" type="button" class="btn btn-primary btn-sm" target="_blank">Скачать</a>
+                                <a href="{% url 'delete_file' slug=file.slug %}" type="button" class="btn btn-primary btn-sm">Удалить</a>
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
+                {% else %}
+                    <div>Файлов нет</div>
+                {% endif %} 
+            </div>
+{% endblock %}   

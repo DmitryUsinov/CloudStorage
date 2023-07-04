@@ -1,0 +1,15 @@
+{% extends 'Storage/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Добавление дисциплины
+{% endblock %}
+
+{% block content %}
+    <h3>Добавление дисциплины в хранилище</h3>
+    <form method="POST" class="post-form" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        {{ form|crispy}}  
+        <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>  
+    </form>  
+{% endblock %}
+

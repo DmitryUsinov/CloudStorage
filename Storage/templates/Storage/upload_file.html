@@ -1,0 +1,14 @@
+{% extends 'Storage/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Загрузка файлов
+{% endblock %}
+
+{% block content %}
+<h2>Загрузка файлов в хранилище</h2>
+<form method="POST" class="post-form" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        {{ form|crispy}}  
+        <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>  
+</form>  
+{% endblock %}

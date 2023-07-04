@@ -1,0 +1,50 @@
+{% extends 'Storage/base.html' %}
+
+{% block title %}
+Облачное хранилище
+{% endblock %}
+
+
+{% block content %}
+    {% if object_list %}
+        {% for p in object_list %}
+        <div>
+            <div class="list-group">
+
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">{{p.title}}</h5>
+                          <p class="card-text"> {{p.info| truncatewords:15}}</p>
+                          <p class="card-text">  Добавлено: {{p.time_update}}</p>
+                          
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Перейти</a>
+                                    </div>
+                                    {% if user.groups.all.0.name == "Студент" %}
+                                    {% else %}
+                                    <div class="col-sm">
+                                        <form method="POST", enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                        <a href="{% url 'delete_discipline' id=p.id %}" class="btn btn-primary" type="button">Удалить</a>
+                                        </form>
+                                    </div>
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+            </div> 
+
+
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <h3>Дисциплины не добавлены</h3>
+    {% endif %}
+{% endblock %}
